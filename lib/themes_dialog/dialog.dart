@@ -1,8 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:themes_sandbox/themes_dialog/components/additional_changes.dart';
 
 import '../UX/user_theme_config.dart';
+import '../provider/theme_provider.dart';
 import '../styles.dart';
 import 'components/brightness_picker.dart';
 import 'components/color_picker_dialog.dart';
@@ -215,19 +217,20 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
             child: const Text('Отмена'),
           ),
         ),
-        // TextButton(
-        //   onPressed: () {
-        //     saveSettings();
-        //   },
-        //   child: const Padding(
-        //     padding: EdgeInsets.all(8.0),
-        //     child: Text('Применить \nтему'),
-        //   ),
-        // ),
+        TextButton(
+          onPressed: () {
+            Provider.of<ThemeProvider>(context, listen: false)
+                .refreshStoragedConfigurations(
+                    themesList.sublist(2), _beingChangedThemeIndex);
+          },
+          child: const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Text('Применить \nтему'),
+          ),
+        ),
         ElevatedButton(
           onPressed: () {
-            print(
-                'Пробую сохранить настройки. Кастомных тем: ${themesList.sublist(2).length}, выбранный индекс: $_beingChangedThemeIndex');
+            print('Пробую сохранить настройки. Кастомных тем: ${themesList.sublist(2).length}, выбранный индекс: $_beingChangedThemeIndex');
             Navigator.pop(
                 context,
                 AdditionalChanges(
