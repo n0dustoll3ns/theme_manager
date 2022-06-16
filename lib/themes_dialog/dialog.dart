@@ -151,7 +151,9 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                         ),
                         ListTile(
                           leading: Icon(
-                            Icons.circle_outlined,
+                            current.brightness == Brightness.light
+                                ? Icons.brightness_5_rounded
+                                : Icons.brightness_2_rounded,
                             color: currentColor,
                           ),
                           trailing: brightnessSetter(
@@ -230,7 +232,8 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         ),
         ElevatedButton(
           onPressed: () {
-            print('Пробую сохранить настройки. Кастомных тем: ${themesList.sublist(2).length}, выбранный индекс: $_beingChangedThemeIndex');
+            print(
+                'Пробую сохранить настройки. Кастомных тем: ${themesList.sublist(2).length}, выбранный индекс: $_beingChangedThemeIndex');
             Navigator.pop(
                 context,
                 AdditionalChanges(
