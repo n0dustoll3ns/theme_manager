@@ -39,7 +39,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
   @override
   void initState() {
     super.initState();
-    print('Инициализирую стейт диалога');
     themesList.addAll(widget.availableConfigurations);
     _beingChangedThemeIndex = widget.beingChangedThemeIndex;
     pickerColor = themesList[_beingChangedThemeIndex].primaryColor;
@@ -244,8 +243,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
               ),
               ElevatedButton(
                 onPressed: () {
-                  print(
-                      'Пробую сохранить настройки. Кастомных тем: ${themesList.sublist(2).length}, выбранный индекс: $_beingChangedThemeIndex');
                   Navigator.pop(
                       context,
                       AdditionalChanges(
@@ -404,7 +401,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
   }
 
   void addNewConfig(int index) {
-    print('Добавляю 1 новую тему в стейте диалогового окна');
     setState(() {
       _beingChangedThemeIndex = index;
       UserThemeConfig newConfig = UserThemeConfig(

@@ -26,8 +26,6 @@ class MyApp extends StatelessWidget {
       child: Consumer<ThemeProvider>(
         child: HomePage(title: 'Home page'),
         builder: (context, themeProvider, child) {
-          print(
-              'Ищу в провайдере нужную тему по индексу. Запрощен индекс ${themeProvider.currentThemeIndex}, Всего доступно тем ${themeProvider.availableConfigurations.length}');
           var activeThemeConfig = themeProvider
               .availableConfigurations[themeProvider.currentThemeIndex];
           return MaterialApp(

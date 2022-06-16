@@ -37,9 +37,6 @@ class SideMenu extends StatelessWidget {
                       );
                     })).then((userChanges) {
               if (userChanges != null) {
-                print(
-                    'Результат из диалога: ${userChanges.newConfigList.length} кастомных тем, выбран индекс ${userChanges.selectedOption}. Обращаюсь к провайдеру с этими данными');
-
                 Provider.of<ThemeProvider>(context, listen: false)
                     .refreshStoragedConfigurations(
                         userChanges.newConfigList, userChanges.selectedOption);

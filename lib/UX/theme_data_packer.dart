@@ -6,7 +6,6 @@ import 'user_theme_config.dart';
 ThemeData buildThemeData(
   UserThemeConfig selectedConfig,
 ) {
-  print('Пробую установить тему по конфигурации ${selectedConfig.toJson()}');
   return ThemeData(
     brightness: selectedConfig.brightness,
     primaryColor: selectedConfig.primaryColor,

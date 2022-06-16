@@ -19,7 +19,6 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
   void initState() {
     super.initState();
     _brightness = widget.initialBrightness;
-    print('initializing br dialog with is ${_brightness}');
   }
 
   @override
