@@ -1,2 +1,2 @@
-  final String keyOfSelectedOption = 'selectedTheme';
-  final String keyOfOptionsList = 'customThemes';
+  const String keyOfSelectedOption = 'selectedTheme';
+  const String keyOfOptionsList = 'customThemes';

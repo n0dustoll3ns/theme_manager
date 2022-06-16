@@ -196,13 +196,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                               activeButtonColor, current, context),
                           title: const Text('Что изменено'),
                         ),
-                        ListTile(
-                          leading: const Icon(Icons.power_input,
-                              color: Colors.amber),
-                          trailing:
-                              Icon(Icons.colorize, color: activeButtonColor),
-                          title: const Text('Smth Else'),
-                        ),
                       ],
                     ),
                   )
