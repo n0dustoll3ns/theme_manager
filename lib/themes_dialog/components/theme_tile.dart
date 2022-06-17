@@ -21,16 +21,16 @@ class ThemeTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final buttonColor = themeConfig.isImmutable == false
         ? Theme.of(context).iconTheme.color
-        : Color(0x809E9E9E);
+        : const Color(0x809E9E9E);
     return ListTile(
+      tileColor: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
       onTap: configureThis,
-      selected: isBeingChanged,
       leading: Icon(Icons.theater_comedy, color: themeConfig.primaryColor),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           themeConfig.isImmutable
-              ? SizedBox.shrink()
+              ? const SizedBox.shrink()
               : IconButton(
                   onPressed: delete,
                   icon: const Icon(Icons.delete),
@@ -38,7 +38,10 @@ class ThemeTile extends StatelessWidget {
           Icon(Icons.settings, color: buttonColor),
         ],
       ),
-      title: Text(themeConfig.name),
+      title: Text(
+        themeConfig.name,
+        style: TextStyle(color: themeConfig.primaryColor),
+      ),
     );
   }
 }
