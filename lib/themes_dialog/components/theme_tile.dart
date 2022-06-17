@@ -22,25 +22,25 @@ class ThemeTile extends StatelessWidget {
     final buttonColor = themeConfig.isImmutable == false
         ? Theme.of(context).iconTheme.color
         : const Color(0x809E9E9E);
-    return ListTile(
-      tileColor: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
-      onTap: configureThis,
-      leading: Icon(Icons.theater_comedy, color: themeConfig.primaryColor),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          themeConfig.isImmutable
-              ? const SizedBox.shrink()
-              : IconButton(
-                  onPressed: delete,
-                  icon: const Icon(Icons.delete),
-                  color: buttonColor),
-          Icon(Icons.settings, color: buttonColor),
-        ],
-      ),
-      title: Text(
-        themeConfig.name,
-        style: TextStyle(color: themeConfig.primaryColor),
+    return Card(
+      margin: EdgeInsets.zero,
+      elevation: 0,
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(horizontal: 6),
+        tileColor: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
+        onTap: configureThis,
+        trailing: IconButton(
+          iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.7,
+          onPressed: themeConfig.isImmutable ? null : delete,
+          icon: themeConfig.isImmutable
+              ? const Icon(Icons.lock)
+              : const Icon(Icons.delete),
+          color: buttonColor,
+        ),
+        title: Text(
+          themeConfig.name,
+          style: TextStyle(color: themeConfig.primaryColor),
+        ),
       ),
     );
   }

@@ -136,20 +136,17 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                   Container(
                     height: 400,
                     width: 250,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      border: Border.all(color: lightColor),
-                    ),
-                    margin: EdgeInsets.all(4),
+                    decoration: kDefaultBoxBorder,
+                    margin: const EdgeInsets.all(4),
                     child: Column(
                       children: [
                         const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text('Theme Configurator'),
+                          child: Text('Конфигуратор тем'),
                         ),
                         Expanded(
                           child: ListView(
-                            padding: EdgeInsets.all(4),
+                            padding: const EdgeInsets.all(4),
                             children: [
                               ListTile(
                                 leading: Icon(
@@ -158,7 +155,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                 ),
                                 trailing: primaryColorSetter(
                                     activeButtonColor!, current, context),
-                                title: const Text('Primary color'),
+                                title: const Text('Основной цвет'),
                               ),
                               ListTile(
                                 leading: Icon(
@@ -169,7 +166,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                 ),
                                 trailing: brightnessSetter(
                                     activeButtonColor, current, context),
-                                title: const Text('Background Color'),
+                                title: const Text('Цвет фона'),
                               ),
                               ListTile(
                                 leading: Icon(Icons.sort_by_alpha,
@@ -179,7 +176,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                         .color),
                                 trailing: fontSizeSnippet(
                                     activeButtonColor, current, context),
-                                title: const Text('Font Size'),
+                                title: const Text('Размер шрифтов'),
                               ),
                               ListTile(
                                 textColor: current.modifiedPackageColor,
@@ -199,7 +196,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                 ),
                                 trailing: beingModifiedElementColorSnippet(
                                     activeButtonColor, current, context),
-                                title: const Text('Что изменено'),
+                                title: const Text('Измененный элемент'),
                               ),
                               ListTile(
                                 textColor: current.crititcalColor,
@@ -209,7 +206,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                 ),
                                 trailing: beingModifiedCriticalColorSnippet(
                                     activeButtonColor, current, context),
-                                title: const Text('Что изменено'),
+                                title: const Text('Цвет критической ошибки'),
                               ),
                             ],
                           ),
@@ -227,7 +224,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                 },
                 child: const Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: const Text('Отмена'),
+                  child: const Text('Назад'),
                 ),
               ),
               TextButton(
@@ -250,7 +247,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                           selectedOption: _beingChangedThemeIndex));
                 },
                 child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8),
+                  padding: EdgeInsets.all(4),
                   child: Text(
                     'Применить \nи выйти',
                   ),
@@ -401,15 +398,19 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
   }
 
   void addNewConfig(int index) {
+    var currentTheme = themesList[_beingChangedThemeIndex];
     setState(() {
       _beingChangedThemeIndex = index;
       UserThemeConfig newConfig = UserThemeConfig(
-        brightness: Theme.of(context).brightness,
+        brightness: currentTheme.brightness,
         description: 'Описание',
         isImmutable: false,
-        name: 'User Theme $index',
+        name: 'Настраиваемая тема $index',
         primaryColor: currentColor,
         fontSizeFactor: fontSizeFactor,
+        modifiedPackageColor: currentTheme.modifiedPackageColor,
+        modifiedElementColor: currentTheme.modifiedElementColor,
+        crititcalColor: currentTheme.crititcalColor,
       );
       themesList.add(newConfig);
     });

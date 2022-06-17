@@ -20,9 +20,9 @@ class UserThemeConfig {
   Color iconColor;
   String name;
   String description;
-  Color modifiedPackageColor = Colors.green;
-  Color modifiedElementColor = Colors.yellow;
-  Color crititcalColor = Colors.red;
+  Color modifiedPackageColor;
+  Color modifiedElementColor;
+  Color crititcalColor;
 
   UserThemeConfig({
     required this.brightness,
@@ -31,6 +31,9 @@ class UserThemeConfig {
     required this.fontSizeFactor,
     required this.name,
     required this.description,
+    required this.modifiedPackageColor,
+    required this.modifiedElementColor,
+    required this.crititcalColor,
   }) : iconColor = primaryColor;
 
   Map<String, dynamic> toJson() => {
@@ -64,18 +67,25 @@ List<UserThemeConfig> defaultThemeConfigurations = [
   UserThemeConfig(
     isImmutable: true,
     brightness: Brightness.light,
-    name: 'Light Theme',
+    name: 'Светлая тема',
     description: 'Description',
     primaryColor: Colors.blue,
     fontSizeFactor: 1,
+    modifiedPackageColor: Colors.green,
+    modifiedElementColor: Colors.yellow,
+    crititcalColor: Colors.red,
   ),
   UserThemeConfig(
-      isImmutable: true,
-      brightness: Brightness.dark,
-      name: 'Dark Theme',
-      description: 'Description',
-      primaryColor: Colors.red,
-      fontSizeFactor: 1),
+    isImmutable: true,
+    brightness: Brightness.dark,
+    name: 'Темная тема',
+    description: 'Description',
+    primaryColor: Colors.red,
+    fontSizeFactor: 1,
+    modifiedPackageColor: Colors.green,
+    modifiedElementColor: Colors.yellow,
+    crititcalColor: Colors.red,
+  ),
 ];
 
 List<UserThemeConfig> decodeThemes(List<String> storageData) {

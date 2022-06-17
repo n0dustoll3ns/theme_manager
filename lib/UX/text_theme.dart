@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'user_theme_config.dart';
 
 const systemFontSizes = [
   112.0,
@@ -16,7 +15,7 @@ const systemFontSizes = [
   12.0,
   14.0,
   12.0,
-  10.0,
+  10.0
 ];
 
 var defaultFontSizes = systemFontSizes.map((e) => e * 0.8).toList();
