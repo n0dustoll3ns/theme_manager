@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:themes_sandbox/themes_dialog/components/additional_changes.dart';
@@ -54,7 +55,8 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         ? Theme.of(context).iconTheme.color
         : const Color.fromARGB(128, 158, 158, 158);
 
-    return MediaQuery.of(context).size.width < 660
+    return (MediaQuery.of(context).size.width < 660 ||
+            MediaQuery.of(context).size.height < 660)
         ? const ViewPortWidthAlertDialog()
         : AlertDialog(
             title: const Center(child: Text('Конфигуратор тем')),
