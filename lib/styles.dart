@@ -6,5 +6,5 @@ const lightColor = Colors.grey;
 
 final BoxDecoration kDefaultBoxBorder = BoxDecoration(
   borderRadius: BorderRadius.circular(4),
-  border: Border.all(color: lightColor),
+  border: Border.all(color: lightColor, width: 0.7),
 );
