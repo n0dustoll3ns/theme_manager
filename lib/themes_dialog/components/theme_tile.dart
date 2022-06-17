@@ -22,24 +22,35 @@ class ThemeTile extends StatelessWidget {
     final buttonColor = themeConfig.isImmutable == false
         ? Theme.of(context).iconTheme.color
         : const Color(0x809E9E9E);
-    return Card(
-      margin: EdgeInsets.zero,
-      elevation: 0,
-      child: ListTile(
-        contentPadding: const EdgeInsets.symmetric(horizontal: 6),
-        tileColor: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
-        onTap: configureThis,
-        trailing: IconButton(
-          iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.7,
-          onPressed: themeConfig.isImmutable ? null : delete,
-          icon: themeConfig.isImmutable
-              ? const Icon(Icons.lock)
-              : const Icon(Icons.delete),
-          color: buttonColor,
-        ),
-        title: Text(
-          themeConfig.name,
-          style: TextStyle(color: themeConfig.primaryColor),
+    return SizedBox(
+      height: 34,
+      child: Card(
+        elevation: 0,
+        child: Container(
+          color: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
+          child: TextButton(
+            onPressed: configureThis,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    themeConfig.name,
+                    style: TextStyle(color: themeConfig.primaryColor),
+                  ),
+                ),
+                IconButton(
+                  padding: EdgeInsets.zero,
+                  iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
+                  onPressed: themeConfig.isImmutable ? null : delete,
+                  icon: themeConfig.isImmutable
+                      ? const Icon(Icons.lock)
+                      : const Icon(Icons.delete),
+                  color: buttonColor,
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );

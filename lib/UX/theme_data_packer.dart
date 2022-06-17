@@ -17,8 +17,5 @@ ThemeData buildThemeData(
     ),
     textTheme:
         AppFontSizes.getTextThemeWithFontSize(selectedConfig.fontSizeFactor),
-    listTileTheme: const ListTileThemeData(
-      contentPadding: EdgeInsets.all(1),
-    ),
   );
 }

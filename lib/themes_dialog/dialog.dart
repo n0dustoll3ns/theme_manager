@@ -90,9 +90,12 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                         Expanded(
                           child: ListView.builder(
                               padding: EdgeInsets.all(4),
-                              itemCount: themesList.length + 1,
+                              itemCount: themesList.length 
+                              + 1
+                              ,
                               itemBuilder: (BuildContext context, int index) {
-                                return index == themesList.length
+                                return 
+                                index == themesList.length
                                     ? ListTile(
                                         title: MaterialButton(
                                           height: 25,
@@ -102,7 +105,8 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                           child: Icon(Icons.add),
                                         ),
                                       )
-                                    : ThemeTile(
+                                    : 
+                                    ThemeTile(
                                         themeConfig: themesList[index],
                                         isBeingChanged:
                                             index == _beingChangedThemeIndex,
@@ -142,7 +146,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                       children: [
                         const Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: Text('Конфигуратор тем'),
+                          child: Text('Настройки выделенной темы'),
                         ),
                         Expanded(
                           child: ListView(
