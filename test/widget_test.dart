@@ -33,24 +33,24 @@ void main() {
     expect(defaultThemeConfigurations[0].toJson(), {
       'isImmutable': true,
       'brightness': 'light',
-      'primaryColor': 4280391411,
+      'primaryColor': "#ff2196f3",
       'fontSizeFactor': 1.0,
-      'iconColor': 4280391411,
+      'iconColor': "#ff2196f3",
       'name': 'Светлая тема',
-      'modifiedPackageColor': 4283215696,
-      'modifiedElementColor': 4294961979,
-      'crititcalColor': 4294198070
+      'modifiedPackageColor': '#ff4caf50',
+      'modifiedElementColor': '#ffffeb3b',
+      'crititcalColor': '#fff44336'
     });
     Map<String, dynamic> darkConfigMap = {
       'isImmutable': true,
       'brightness': 'dark',
-      'primaryColor': Colors.red.value,
+      'primaryColor': '#fff44336',
       'fontSizeFactor': 1.0,
-      'iconColor': Colors.red.value,
+      'iconColor': '#fff44336',
       'name': 'Темная тема',
-      'modifiedPackageColor': 4283215696,
-      'modifiedElementColor': 4294961979,
-      'crititcalColor': 4294198070
+      'modifiedPackageColor': '#ff4caf50',
+      'modifiedElementColor': '#ffffeb3b',
+      'crititcalColor': '#fff44336'
     };
     var darkConfig = UserThemeConfig.fromJson(darkConfigMap);
     expect(darkConfig.isImmutable, true);

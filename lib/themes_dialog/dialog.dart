@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:themes_sandbox/UX/hex_to_string_converter.dart';
 import 'package:themes_sandbox/themes_dialog/components/additional_changes.dart';
 
 import '../UX/user_theme_config.dart';
@@ -154,6 +155,9 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                           fontSizeFactor = themesList[index].fontSizeFactor;
                           renamingTextController.text = themesList[index].name;
                         });
+                        print(themesList[_beingChangedThemeIndex]
+                            .primaryColor
+                            .toHex());
                       },
                       delete: () {
                         themesList.removeAt(index);

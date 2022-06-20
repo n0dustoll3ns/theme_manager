@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:json_annotation/json_annotation.dart';
+import 'hex_to_string_converter.dart';
 
 const List<Color> presetColors = [
   Colors.red,
@@ -37,26 +37,26 @@ class UserThemeConfig {
   Map<String, dynamic> toJson() => {
         'isImmutable': isImmutable,
         'brightness': brightness.name.toString(),
-        'primaryColor': primaryColor.value,
+        'primaryColor': primaryColor.toHex(),
         'fontSizeFactor': fontSizeFactor,
-        'iconColor': iconColor.value,
+        'iconColor': iconColor.toHex(),
         'name': name,
-        'modifiedPackageColor': modifiedPackageColor.value,
-        'modifiedElementColor': modifiedElementColor.value,
-        'crititcalColor': crititcalColor.value,
+        'modifiedPackageColor': modifiedPackageColor.toHex(),
+        'modifiedElementColor': modifiedElementColor.toHex(),
+        'crititcalColor': crititcalColor.toHex(),
       };
 
   UserThemeConfig.fromJson(Map<String, dynamic> json)
       : isImmutable = json['isImmutable'],
         brightness =
             json['brightness'] == 'light' ? Brightness.light : Brightness.dark,
-        primaryColor = Color(json['primaryColor']),
+        primaryColor = HexColor.fromHex(json['primaryColor']),
         fontSizeFactor = json['fontSizeFactor'],
-        iconColor = Color(json['iconColor']),
+        iconColor = HexColor.fromHex(json['iconColor']),
         name = json['name'],
-        modifiedPackageColor = Color(json['modifiedPackageColor']),
-        modifiedElementColor = Color(json['modifiedElementColor']),
-        crititcalColor = Color(json['crititcalColor']);
+        modifiedPackageColor = HexColor.fromHex(json['modifiedPackageColor']),
+        modifiedElementColor = HexColor.fromHex(json['modifiedElementColor']),
+        crititcalColor = HexColor.fromHex(json['crititcalColor']);
 }
 
 List<UserThemeConfig> defaultThemeConfigurations = [

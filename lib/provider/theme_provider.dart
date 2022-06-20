@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:themes_sandbox/UX/hex_to_string_converter.dart';
 import '../UX/user_theme_config.dart';
 import '../keys.dart';
 
@@ -13,6 +15,9 @@ class ThemeProvider with ChangeNotifier {
   }
 
   loadState() async {
+    // var defaultThemes =
+    //     (await rootBundle.loadString('assets/customthemes.json'));
+
     var prefs = await SharedPreferences.getInstance();
     var themesInStrorage = prefs.getStringList(keyOfOptionsList) ?? [];
     if (prefs.getStringList(keyOfOptionsList) != null) {
@@ -32,7 +37,9 @@ class ThemeProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList(keyOfOptionsList, encodeThemes(configurations));
     switchThemeTo(selectedOption);
-    print(configurations.map((e) => jsonEncode(e.toJson())).toList());
+    // var defaultThemes =
+    //     (await rootBundle.loadString('assets/customthemes.json'));
+
   }
 
   void switchThemeTo(int selectedOption) async {
