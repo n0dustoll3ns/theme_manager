@@ -157,52 +157,52 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         ),
         Expanded(
           child: ListView.builder(
-              controller: ScrollController(),
-              padding: EdgeInsets.zero,
-              itemCount: themesList.length + 1,
-              itemBuilder: (BuildContext context, int index) {
-                return index == themesList.length
-                    ? TextButton(
-                        onPressed: () => addNewConfig(index),
-                        child: Icon(Icons.add,
-                            color:
-                                Theme.of(context).textTheme.bodyMedium!.color ??
-                                    Colors.grey),
-                      )
-                    : ThemeTile(
-                        themeConfig: themesList[index],
-                        isBeingChanged: index == _beingChangedThemeIndex,
-                        configureThis: () {
-                          setState(() {
-                            _beingChangedThemeIndex = index;
-                            currentColor = themesList[index].primaryColor;
-                            currentBrightness = themesList[index].brightness;
-                            fontSizeFactor = themesList[index].fontSizeFactor;
-                            renamingTextController.text =
-                                themesList[index].name;
-                          });
-                        },
-                        delete: () {
-                          themesList.removeAt(index);
-                          if (_beingChangedThemeIndex == index ||
-                              themesList.length - 1 < _beingChangedThemeIndex) {
-                            _beingChangedThemeIndex--;
-                          }
-                          setState(() {});
-                        },
-                        focusNode: focusNode,
-                        rename: (String newName) {
-                          setState(() {
-                            _isBeingRenamed = false;
-                            themesList[_beingChangedThemeIndex].name =
-                                renamingTextController.text;
-                          });
-                        },
-                        isRenamingNow:
-                            _isBeingRenamed && _beingChangedThemeIndex == index,
-                        renamingTextController: renamingTextController,
-                        beginRenaming: () {
-                          setState(() {
+            controller: ScrollController(),
+            padding: EdgeInsets.zero,
+            itemCount: themesList.length + 1,
+            itemBuilder: (BuildContext context, int index) {
+              return index == themesList.length
+                  ? TextButton(
+                      onPressed: () => addNewConfig(index),
+                      child: Icon(Icons.add,
+                          color:
+                              Theme.of(context).textTheme.bodyMedium!.color ??
+                                  Colors.grey),
+                    )
+                  : ThemeTile(
+                      themeConfig: themesList[index],
+                      isBeingChanged: index == _beingChangedThemeIndex,
+                      configureThis: () {
+                        setState(() {
+                          _beingChangedThemeIndex = index;
+                          currentColor = themesList[index].primaryColor;
+                          currentBrightness = themesList[index].brightness;
+                          fontSizeFactor = themesList[index].fontSizeFactor;
+                          renamingTextController.text = themesList[index].name;
+                        });
+                      },
+                      delete: () {
+                        themesList.removeAt(index);
+                        if (_beingChangedThemeIndex == index ||
+                            themesList.length - 1 < _beingChangedThemeIndex) {
+                          _beingChangedThemeIndex--;
+                        }
+                        setState(() {});
+                      },
+                      focusNode: focusNode,
+                      rename: (String newName) {
+                        setState(() {
+                          _isBeingRenamed = false;
+                          themesList[_beingChangedThemeIndex].name =
+                              renamingTextController.text;
+                        });
+                      },
+                      isRenamingNow:
+                          _isBeingRenamed && _beingChangedThemeIndex == index,
+                      renamingTextController: renamingTextController,
+                      beginRenaming: () {
+                        setState(
+                          () {
                             _beingChangedThemeIndex = index;
                             currentColor = themesList[index].primaryColor;
                             currentBrightness = themesList[index].brightness;
@@ -211,10 +211,12 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                                 themesList[index].name;
 
                             _isBeingRenamed = true;
-                          });
-                        },
-                      );
-              }),
+                          },
+                        );
+                      },
+                    );
+            },
+          ),
         ),
       ],
     );

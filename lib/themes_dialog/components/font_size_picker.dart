@@ -23,7 +23,7 @@ class FontSizePickerDialogState extends State<FontSizePickerDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Font Size'),
+      title: Text('Размер шрифтов'),
       content: SizedBox(
         height: 35,
         child: Slider(

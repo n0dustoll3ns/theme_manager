@@ -22,7 +22,7 @@ class SideMenu extends StatelessWidget {
           ),
           const Center(
             child: Text(
-              "Some Menu",
+              "Какое-нибудь меню",
             ),
           ),
           TextButton(
@@ -42,7 +42,7 @@ class SideMenu extends StatelessWidget {
                         userChanges.newConfigList, userChanges.selectedOption);
               }
             }),
-            child: const Text('Settings'),
+            child: const Text('конфигуратор тем'),
           )
         ],
       ),

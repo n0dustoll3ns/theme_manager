@@ -8,7 +8,7 @@ class ViewPortWidthAlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Предупрждение'),
+      title: const Text('Предупреждение'),
       content: const SizedBox(
         child: Text(
             'Сделайте окно браузера больше. Минимальная ширина: 660 пикселей'),
@@ -18,7 +18,7 @@ class ViewPortWidthAlertDialog extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text('Ok'),
+          child: const Text('ОК'),
         )
       ],
     );

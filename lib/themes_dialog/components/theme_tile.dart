@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:themes_sandbox/UX/user_theme_config.dart';
 
 class ThemeTile extends StatelessWidget {
@@ -18,43 +19,59 @@ class ThemeTile extends StatelessWidget {
   final bool isBeingChanged;
   final UserThemeConfig themeConfig;
   final VoidCallback configureThis;
+  final VoidCallback beginRenaming;
+  final Function(String) rename;
   final VoidCallback delete;
   final FocusNode focusNode;
   final bool isRenamingNow;
   final TextEditingController renamingTextController;
-  final Function(String) rename;
-  final VoidCallback beginRenaming;
 
   @override
   Widget build(BuildContext context) {
     final buttonColor = themeConfig.isImmutable == false
         ? Theme.of(context).iconTheme.color
         : const Color(0x809E9E9E);
-    return Card(
-      margin: EdgeInsets.zero,
-      elevation: 0,
-      child: Container(
-        color: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
-        height: 34,
-        child: TextButton(
-          onLongPress: beginRenaming,
-          onPressed: configureThis,
+    return GestureDetector(
+      onDoubleTap: beginRenaming,
+      onTap: configureThis,
+      child: Card(
+        margin: EdgeInsets.zero,
+        elevation: 0,
+        child: Container(
+          color: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
+          height: 34,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: isRenamingNow
-                    ? TextField(
-                        focusNode: focusNode,
-                        autofocus: true,
-                        onEditingComplete: () {
-                          rename(renamingTextController.text);
-                        },
-                        controller: renamingTextController)
-                    : Text(
-                        themeConfig.name,
-                        style: TextStyle(color: themeConfig.primaryColor),
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: isRenamingNow
+                      ? TextField(
+                          cursorWidth: 0.7,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                              color: Theme.of(context).iconTheme.color,
+                              padding: EdgeInsets.zero,
+                              iconSize: Theme.of(context).iconTheme.size ??
+                                  24 * 0.8,
+                              onPressed: () {
+                                rename(renamingTextController.text);
+                              },
+                              icon: Icon(Icons.subdirectory_arrow_left),
+                            ),
+                          ),
+                          focusNode: focusNode,
+                          autofocus: true,
+                          onEditingComplete: () {
+                            rename(renamingTextController.text);
+                          },
+                          controller: renamingTextController)
+                      : Text(
+                          themeConfig.name,
+                          style: TextStyle(color: themeConfig.primaryColor),
+                        ),
+                ),
               ),
               IconButton(
                 padding: EdgeInsets.zero,

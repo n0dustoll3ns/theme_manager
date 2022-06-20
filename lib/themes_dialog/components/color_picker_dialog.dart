@@ -25,7 +25,7 @@ class ColorPickerDialogState extends State<ColorPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Select Color'),
+      title: Text('Выберите цвет'),
       content: SizedBox(
         child: BlockPicker(
           pickerColor: _color,

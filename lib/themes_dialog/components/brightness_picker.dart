@@ -23,7 +23,7 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Text('Choose Brightness'),
+      title: const Text('Выберите цвет фона'),
       content: Row(
         children: [
           GestureDetector(
