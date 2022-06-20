@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:themes_sandbox/UX/hex_to_string_converter.dart';
+import '../UX/default_config.dart';
 import '../UX/user_theme_config.dart';
 import '../keys.dart';
 
@@ -15,15 +15,27 @@ class ThemeProvider with ChangeNotifier {
   }
 
   loadState() async {
-    // var defaultThemes =
-    //     (await rootBundle.loadString('assets/customthemes.json'));
+    final String defaultThemesEncoded =
+        await rootBundle.loadString('customthemes.json');
+    List<dynamic> defaultThemesUnpacked = [];
+    try {
+      defaultThemesUnpacked = jsonDecode(defaultThemesEncoded)["themes"];
+      _availableConfigurations.clear();
+      List<UserThemeConfig> defaultThemes = defaultThemesUnpacked
+          .map((e) => UserThemeConfig.fromJson(e))
+          .toList();
+      _availableConfigurations.addAll(defaultThemes);
+    } finally {
+      defaultThemesUnpacked = defaultThemesWithinBuild;
+    }
+    //ДОБАВИЛ ТЕМЫ В КОД НА СЛУЧАЙ УТРАТЫ ИЛИ ПОРЧИ ФАЙЛА JSON
 
     var prefs = await SharedPreferences.getInstance();
     var themesInStrorage = prefs.getStringList(keyOfOptionsList) ?? [];
+    _selectedTheme = prefs.getInt(keyOfSelectedOption) ?? 0;
     if (prefs.getStringList(keyOfOptionsList) != null) {
       _availableConfigurations.addAll(decodeThemes(themesInStrorage));
     }
-    _selectedTheme = prefs.getInt(keyOfSelectedOption) ?? 0;
     notifyListeners();
   }
 
@@ -39,7 +51,6 @@ class ThemeProvider with ChangeNotifier {
     switchThemeTo(selectedOption);
     // var defaultThemes =
     //     (await rootBundle.loadString('assets/customthemes.json'));
-
   }
 
   void switchThemeTo(int selectedOption) async {

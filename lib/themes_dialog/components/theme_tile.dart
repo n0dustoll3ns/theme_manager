@@ -57,7 +57,7 @@ class ThemeTile extends StatelessWidget {
                               onPressed: () {
                                 rename(renamingTextController.text);
                               },
-                              icon: Icon(Icons.subdirectory_arrow_left),
+                              icon: const Icon(Icons.subdirectory_arrow_left),
                             ),
                           ),
                           focusNode: focusNode,
