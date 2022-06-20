@@ -7,6 +7,9 @@ ThemeData buildThemeData(
   UserThemeConfig selectedConfig,
 ) {
   return ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(elevation: 5),
+    ),
     brightness: selectedConfig.brightness,
     primaryColor: selectedConfig.primaryColor,
     primarySwatch:

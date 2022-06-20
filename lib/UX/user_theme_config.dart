@@ -19,7 +19,6 @@ class UserThemeConfig {
   double fontSizeFactor;
   Color iconColor;
   String name;
-  String description;
   Color modifiedPackageColor;
   Color modifiedElementColor;
   Color crititcalColor;
@@ -30,7 +29,6 @@ class UserThemeConfig {
     required this.isImmutable,
     required this.fontSizeFactor,
     required this.name,
-    required this.description,
     required this.modifiedPackageColor,
     required this.modifiedElementColor,
     required this.crititcalColor,
@@ -43,7 +41,6 @@ class UserThemeConfig {
         'fontSizeFactor': fontSizeFactor,
         'iconColor': iconColor.value,
         'name': name,
-        'description': description,
         'modifiedPackageColor': modifiedPackageColor.value,
         'modifiedElementColor': modifiedElementColor.value,
         'crititcalColor': crititcalColor.value,
@@ -57,7 +54,6 @@ class UserThemeConfig {
         fontSizeFactor = json['fontSizeFactor'],
         iconColor = Color(json['iconColor']),
         name = json['name'],
-        description = json['description'],
         modifiedPackageColor = Color(json['modifiedPackageColor']),
         modifiedElementColor = Color(json['modifiedElementColor']),
         crititcalColor = Color(json['crititcalColor']);
@@ -68,7 +64,6 @@ List<UserThemeConfig> defaultThemeConfigurations = [
     isImmutable: true,
     brightness: Brightness.light,
     name: 'Светлая тема',
-    description: 'Description',
     primaryColor: Colors.blue,
     fontSizeFactor: 1,
     modifiedPackageColor: Colors.green,
@@ -79,7 +74,6 @@ List<UserThemeConfig> defaultThemeConfigurations = [
     isImmutable: true,
     brightness: Brightness.dark,
     name: 'Темная тема',
-    description: 'Description',
     primaryColor: Colors.red,
     fontSizeFactor: 1,
     modifiedPackageColor: Colors.green,

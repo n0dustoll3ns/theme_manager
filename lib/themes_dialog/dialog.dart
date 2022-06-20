@@ -90,7 +90,11 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
             title: Container(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 decoration: kDefaultWindowTitleDecorationOf(context),
-                child: const Center(child: Text('Конфигуратор тем'))),
+                child: Center(
+                    child: Text(
+                  'Конфигуратор тем',
+                  style: TextStyle(color: computedFontLuminanceFrom(context)),
+                ))),
             content: SizedBox(
               height: 420,
               width: 530,
@@ -515,7 +519,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
       _beingChangedThemeIndex = index;
       UserThemeConfig newConfig = UserThemeConfig(
         brightness: currentTheme.brightness,
-        description: 'Описание',
         isImmutable: false,
         name: 'Настраиваемая тема $index',
         primaryColor: currentColor,

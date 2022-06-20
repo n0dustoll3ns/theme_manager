@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../UX/user_theme_config.dart';
@@ -30,6 +32,7 @@ class ThemeProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList(keyOfOptionsList, encodeThemes(configurations));
     switchThemeTo(selectedOption);
+    print(configurations.map((e) => jsonEncode(e.toJson())).toList());
   }
 
   void switchThemeTo(int selectedOption) async {

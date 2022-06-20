@@ -17,3 +17,9 @@ BoxDecoration kDefaultWindowTitleDecorationOf(BuildContext context) =>
         topRight: kDefaultBorderRadius,
       ),
     );
+
+Color computedFontLuminanceFrom(BuildContext context) =>
+    Theme.of(context).primaryColor.computeLuminance() > 0.5
+        ? Colors.black
+        : Colors.white;
+

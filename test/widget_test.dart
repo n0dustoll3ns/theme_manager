@@ -36,8 +36,7 @@ void main() {
       'primaryColor': 4280391411,
       'fontSizeFactor': 1.0,
       'iconColor': 4280391411,
-      'name': 'Light Theme',
-      'description': 'Description',
+      'name': 'Светлая тема',
       'modifiedPackageColor': 4283215696,
       'modifiedElementColor': 4294961979,
       'crititcalColor': 4294198070
@@ -48,8 +47,7 @@ void main() {
       'primaryColor': Colors.red.value,
       'fontSizeFactor': 1.0,
       'iconColor': Colors.red.value,
-      'name': 'Dark Theme',
-      'description': 'Description',
+      'name': 'Темная тема',
       'modifiedPackageColor': 4283215696,
       'modifiedElementColor': 4294961979,
       'crititcalColor': 4294198070
@@ -60,8 +58,7 @@ void main() {
     expect(darkConfig.primaryColor.value, Colors.red.value);
     expect(darkConfig.fontSizeFactor, 1.0);
     expect(darkConfig.iconColor.value, Colors.red.value);
-    expect(darkConfig.name, 'Dark Theme');
-    expect(darkConfig.description, 'Description');
+    expect(darkConfig.name, 'Темная тема');
     expect(darkConfig.modifiedPackageColor.value, Colors.green.value);
     expect(darkConfig.modifiedElementColor.value, Colors.yellow.value);
     expect(darkConfig.crititcalColor.value, Colors.red.value);
