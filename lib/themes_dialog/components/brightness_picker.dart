@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class BrightnessPickerDialog extends StatefulWidget {
   /// initial selection for the slider
@@ -29,10 +28,11 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
         children: [
           GestureDetector(
             onTap: () {
-              if (_brightness == Brightness.dark)
+              if (_brightness == Brightness.dark) {
                 setState(() {
                   _brightness = Brightness.light;
                 });
+              }
               Navigator.pop(context, _brightness);
             },
             child: AnimatedContainer(
@@ -58,9 +58,12 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Icon(Icons.brightness_5_rounded),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 8),
+                        child: Icon(Icons.brightness_5_rounded),
+                      ),
                       Text(
-                        'Light mode',
+                        'Светлая тема',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],
@@ -74,10 +77,11 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
           ),
           GestureDetector(
             onTap: () {
-              if (_brightness == Brightness.light)
+              if (_brightness == Brightness.light) {
                 setState(() {
                   _brightness = Brightness.dark;
                 });
+              }
               Navigator.pop(context, _brightness);
             },
             child: AnimatedContainer(
@@ -103,9 +107,12 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      const Icon(Icons.brightness_2_rounded),
+                      const Padding(
+                        padding: EdgeInsets.only(right: 8),
+                        child: Icon(Icons.brightness_2_rounded),
+                      ),
                       Text(
-                        'Dark mode',
+                        'Темная тема',
                         style: Theme.of(context).textTheme.subtitle2,
                       ),
                     ],

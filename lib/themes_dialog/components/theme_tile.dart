@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:themes_sandbox/UX/user_theme_config.dart';
 
 class ThemeTile extends StatelessWidget {
@@ -10,12 +8,22 @@ class ThemeTile extends StatelessWidget {
     required this.isBeingChanged,
     required this.configureThis,
     required this.delete,
+    required this.focusNode,
+    required this.rename,
+    required this.isRenamingNow,
+    required this.renamingTextController,
+    required this.beginRenaming,
   }) : super(key: key);
 
   final bool isBeingChanged;
   final UserThemeConfig themeConfig;
   final VoidCallback configureThis;
   final VoidCallback delete;
+  final FocusNode focusNode;
+  final bool isRenamingNow;
+  final TextEditingController renamingTextController;
+  final Function(String) rename;
+  final VoidCallback beginRenaming;
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +37,24 @@ class ThemeTile extends StatelessWidget {
         color: isBeingChanged ? Colors.grey.withOpacity(0.5) : null,
         height: 34,
         child: TextButton(
+          onLongPress: beginRenaming,
           onPressed: configureThis,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                child: Text(
-                  themeConfig.name,
-                  style: TextStyle(color: themeConfig.primaryColor),
-                ),
+                child: isRenamingNow
+                    ? TextField(
+                        focusNode: focusNode,
+                        autofocus: true,
+                        onEditingComplete: () {
+                          rename(renamingTextController.text);
+                        },
+                        controller: renamingTextController)
+                    : Text(
+                        themeConfig.name,
+                        style: TextStyle(color: themeConfig.primaryColor),
+                      ),
               ),
               IconButton(
                 padding: EdgeInsets.zero,

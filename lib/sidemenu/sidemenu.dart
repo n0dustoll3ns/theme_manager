@@ -15,7 +15,7 @@ class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
+      child: Column(
         children: [
           const DrawerHeader(
             child: FlutterLogo(),
