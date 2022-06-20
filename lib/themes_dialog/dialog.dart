@@ -84,7 +84,13 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
             MediaQuery.of(context).size.height < 660)
         ? const ViewPortWidthAlertDialog()
         : AlertDialog(
-            title: const Center(child: Text('Конфигуратор тем')),
+            actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+            actionsAlignment: MainAxisAlignment.start,
+            titlePadding: EdgeInsets.zero,
+            title: Container(
+                padding: const EdgeInsets.symmetric(vertical: 8),
+                decoration: kDefaultWindowTitleDecorationOf(context),
+                child: const Center(child: Text('Конфигуратор тем'))),
             content: SizedBox(
               height: 420,
               width: 530,
@@ -108,43 +114,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                 ],
               ),
             ),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context, null);
-                },
-                child: const Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text('Назад'),
-                ),
-              ),
-              TextButton(
-                onPressed: () {
-                  Provider.of<ThemeProvider>(context, listen: false)
-                      .refreshStoragedConfigurations(
-                          themesList.sublist(2), _beingChangedThemeIndex);
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Применить \nтему'),
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(
-                      context,
-                      AdditionalChanges(
-                          newConfigList: themesList.sublist(2),
-                          selectedOption: _beingChangedThemeIndex));
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(4),
-                  child: Text(
-                    'Применить \nи выйти',
-                  ),
-                ),
-              ),
-            ],
+            actions: actions(),
           );
   }
 
@@ -303,15 +273,17 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                         padding: EdgeInsets.only(left: 8.0),
                         child: Text('Размер шрифтов'),
                       )),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
+                      TextButton(
                         onPressed: current.isImmutable
                             ? null
                             : _showFontSizePickerDialog,
-                        icon: Icon(Icons.sort_by_alpha,
-                            color:
-                                Theme.of(context).textTheme.bodyMedium!.color),
+                        child: Text(
+                          '${(current.fontSizeFactor * 100).round()} %',
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodySmall!
+                              .copyWith(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),
@@ -407,6 +379,46 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
       ],
     );
   }
+
+  List<Widget> actions() => [
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context, null);
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: Text('Отменить'),
+          ),
+        ),
+        // //Этот закоментированный код предназначен для случая, если захотим добавить кнопку, которая сохранит и обновит в провайдере и хранилище изменения внесенные пользователем без выхода из окна конфигуратора.
+        // //This commented code below is intended for the case when we want to add function save and refresh all changes contributed by user within provider and local storage without exiting the window.
+        // TextButton(
+        //   onPressed: () {
+        //     Provider.of<ThemeProvider>(context, listen: false)
+        //         .refreshStoragedConfigurations(
+        //             themesList.sublist(2), _beingChangedThemeIndex);
+        //   },
+        //   child: const Padding(
+        //     padding: EdgeInsets.all(4),
+        //     child: Text('Применить \nтему'),
+        //   ),
+        // ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.pop(
+                context,
+                FinalChanges(
+                    newConfigList: themesList.sublist(2),
+                    selectedOption: _beingChangedThemeIndex));
+          },
+          child: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 4),
+            child: Text(
+              'Сохранить',
+            ),
+          ),
+        )
+      ];
 
   void _showFontSizePickerDialog() async {
     final selectedFontSize = await showDialog<double>(

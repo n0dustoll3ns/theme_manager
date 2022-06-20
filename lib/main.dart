@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 
 import 'UX/theme_data_packer.dart';
-import 'UX/user_theme_config.dart';
 import 'sidemenu/sidemenu.dart';
 import 'provider/theme_provider.dart';
 
@@ -24,7 +22,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: Consumer<ThemeProvider>(
-        child: HomePage(title: 'Home page'),
+        child: const HomePage(title: 'Home page'),
         builder: (context, themeProvider, child) {
           var activeThemeConfig = themeProvider
               .availableConfigurations[themeProvider.currentThemeIndex];
@@ -45,9 +43,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: SideMenu(),
+      drawer: const SideMenu(),
       appBar: AppBar(
-        title: Text('title'),
+        title: const Text('title'),
       ),
       body: SingleChildScrollView(
         child: Center(

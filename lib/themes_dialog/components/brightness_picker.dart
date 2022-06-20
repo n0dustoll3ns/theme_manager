@@ -37,7 +37,7 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
             },
             child: AnimatedContainer(
               height: 100,
-              duration: Duration(milliseconds: 440),
+              duration: const Duration(milliseconds: 440),
               decoration: BoxDecoration(
                 color: _brightness == Brightness.light
                     ? Theme.of(context).primaryColor
@@ -86,7 +86,7 @@ class BrightnessPickerDialogState extends State<BrightnessPickerDialog> {
             },
             child: AnimatedContainer(
               height: 100,
-              duration: Duration(milliseconds: 440),
+              duration: const Duration(milliseconds: 440),
               decoration: BoxDecoration(
                 color: _brightness == Brightness.dark
                     ? Theme.of(context).primaryColor

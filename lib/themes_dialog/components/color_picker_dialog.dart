@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 class ColorPickerDialog extends StatefulWidget {
@@ -25,7 +23,7 @@ class ColorPickerDialogState extends State<ColorPickerDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Выберите цвет'),
+      title: const Text('Выберите цвет'),
       content: SizedBox(
         child: BlockPicker(
           pickerColor: _color,

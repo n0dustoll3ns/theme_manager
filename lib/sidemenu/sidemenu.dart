@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:themes_sandbox/provider/theme_provider.dart';
 
-import '../UX/user_theme_config.dart';
 import '../themes_dialog/components/additional_changes.dart';
 import '../themes_dialog/dialog.dart';
 
@@ -26,7 +24,7 @@ class SideMenu extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () => showDialog<AdditionalChanges>(
+            onPressed: () => showDialog<FinalChanges>(
                 context: context,
                 builder: (BuildContext context) => Consumer<ThemeProvider>(
                         builder: (context, themeProvider, child) {

@@ -11,7 +11,7 @@ class ViewPortWidthAlertDialog extends StatelessWidget {
       title: const Text('Предупреждение'),
       content: const SizedBox(
         child: Text(
-            'Сделайте окно браузера больше. Минимальная ширина: 660 пикселей'),
+            'Сделайте окно браузера больше.'),
       ),
       actions: [
         ElevatedButton(
