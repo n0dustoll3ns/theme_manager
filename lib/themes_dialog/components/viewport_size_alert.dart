@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ViewPortWidthAlertDialog extends StatelessWidget {
-  const ViewPortWidthAlertDialog({
+class ViewportSizeAlertDialog extends StatelessWidget {
+  const ViewportSizeAlertDialog({
     Key? key,
   }) : super(key: key);
 
@@ -10,8 +10,7 @@ class ViewPortWidthAlertDialog extends StatelessWidget {
     return AlertDialog(
       title: const Text('Предупреждение'),
       content: const SizedBox(
-        child: Text(
-            'Сделайте окно браузера больше.'),
+        child: Text('Сделайте окно браузера больше.'),
       ),
       actions: [
         ElevatedButton(

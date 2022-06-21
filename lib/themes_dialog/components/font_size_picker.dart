@@ -38,7 +38,7 @@ class FontSizePickerDialogState extends State<FontSizePickerDialog> {
               });
             },
             onChangeEnd: (double value) {
-              Navigator.pop(context, _fontSize);
+              Navigator.pop(context, value);
             }),
       ),
     );

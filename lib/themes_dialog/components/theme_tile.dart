@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:themes_sandbox/UX/user_theme_config.dart';
 
 class ThemeTile extends StatelessWidget {
@@ -45,27 +46,36 @@ class ThemeTile extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: isRenamingNow
-                      ? TextField(
-                          cursorWidth: 0.7,
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              color: Theme.of(context).iconTheme.color,
-                              padding: EdgeInsets.zero,
-                              iconSize:
-                                  Theme.of(context).iconTheme.size ?? 24 * 0.8,
-                              onPressed: () {
+                      ? RawKeyboardListener(
+                          onKey: (value) {
+                            if (value.logicalKey == LogicalKeyboardKey.escape) {
+                              focusNode.unfocus();
+                            }
+                          },
+                          focusNode: focusNode,
+                          child: TextField(
+                              cursorWidth: 0.7,
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  color: Theme.of(context).iconTheme.color,
+                                  padding: EdgeInsets.zero,
+                                  iconSize: Theme.of(context).iconTheme.size ??
+                                      24 * 0.8,
+                                  onPressed: () {
+                                    rename(renamingTextController.text);
+                                  },
+                                  icon:
+                                      const Icon(Icons.subdirectory_arrow_left),
+                                ),
+                              ),
+                              autofocus: true,
+                              onEditingComplete: () {
                                 rename(renamingTextController.text);
                               },
-                              icon: const Icon(Icons.subdirectory_arrow_left),
-                            ),
-                          ),
-                          focusNode: focusNode,
-                          autofocus: true,
-                          onEditingComplete: () {
-                            rename(renamingTextController.text);
-                          },
-                          controller: renamingTextController)
+                              controller: renamingTextController),
+                        )
                       : Text(
+                          overflow: TextOverflow.fade,
                           themeConfig.name,
                           style: TextStyle(color: themeConfig.primaryColor),
                         ),

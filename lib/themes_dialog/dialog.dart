@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:themes_sandbox/themes_dialog/components/additional_changes.dart';
 
 import '../UX/user_theme_config.dart';
@@ -7,8 +6,9 @@ import '../styles.dart';
 import 'components/brightness_picker.dart';
 import 'components/color_picker_dialog.dart';
 import 'components/font_size_picker.dart';
+import 'components/setting_tile.dart';
 import 'components/theme_tile.dart';
-import 'components/width_alert.dart';
+import 'components/viewport_size_alert.dart';
 
 class ThemeSettingsDialogWindow extends StatefulWidget {
   ThemeSettingsDialogWindow(
@@ -76,7 +76,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
 
     return (MediaQuery.of(context).size.width < 660 ||
             MediaQuery.of(context).size.height < 660)
-        ? const ViewPortWidthAlertDialog()
+        ? const ViewportSizeAlertDialog()
         : AlertDialog(
             actionsPadding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
             actionsAlignment: MainAxisAlignment.start,
@@ -201,176 +201,144 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
             controller: ScrollController(),
             padding: const EdgeInsets.all(4),
             children: [
-              Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text('Основной цвет'),
-                      )),
-                      IconButton(
-                        hoverColor: Colors.transparent,
-                        padding: EdgeInsets.zero,
-                        iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
-                        onPressed: current.isImmutable
-                            ? null
-                            : _showPrimaryColorPickerDialog,
-                        icon: Icon(Icons.circle, color: current.primaryColor),
-                      )
-                    ],
-                  ),
+              SettingTile<Color>(
+                showDialogCallback: () {
+                  showDialog<Color>(
+                    context: context,
+                    builder: (context) =>
+                        ColorPickerDialog(intialColor: current.primaryColor),
+                  ).then((newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        current.primaryColor = newValue;
+                      });
+                    }
+                  });
+                },
+                settingName: 'Цвет фона',
+                currentConfig: current,
+                value: current.primaryColor,
+                valueIcon: Icon(Icons.circle, color: current.primaryColor),
+              ),
+              SettingTile<Brightness>(
+                showDialogCallback: () {
+                  showDialog<Brightness>(
+                    context: context,
+                    builder: (context) => BrightnessPickerDialog(
+                        initialBrightness: current.brightness),
+                  ).then((newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        current.brightness = newValue;
+                      });
+                    }
+                  });
+                },
+                settingName: 'Цвет фона',
+                currentConfig: current,
+                value: current.brightness,
+                valueIcon: Icon(
+                  current.brightness == Brightness.light
+                      ? Icons.brightness_5_rounded
+                      : Icons.brightness_2_rounded,
+                  color: currentColor,
                 ),
               ),
-              Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text('Цвет фона'),
-                      )),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
-                        onPressed: current.isImmutable
-                            ? null
-                            : _showBrightnessSetterDialog,
-                        icon: Icon(
-                          current.brightness == Brightness.light
-                              ? Icons.brightness_5_rounded
-                              : Icons.brightness_2_rounded,
-                          color: currentColor,
-                        ),
-                      ),
-                    ],
-                  ),
+              SettingTile<double>(
+                showDialogCallback: () {
+                  showDialog<double>(
+                    context: context,
+                    builder: (context) => FontSizePickerDialog(
+                        initialFontSizeFactor: current.fontSizeFactor),
+                  ).then((newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        current.fontSizeFactor = newValue;
+                      });
+                    }
+                  });
+                },
+                settingName: 'Размер шрифтов',
+                currentConfig: current,
+                value: current.fontSizeFactor,
+                valueIcon: Text(
+                  '${(current.fontSizeFactor * 10).round()}',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .copyWith(fontWeight: FontWeight.bold),
                 ),
               ),
-              GestureDetector(
-                onTap: current.isImmutable ? null : _showFontSizePickerDialog,
-                child: Card(
-                  margin: EdgeInsets.zero,
-                  elevation: 0,
-                  child: SizedBox(
-                    height: 34,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Expanded(
-                            child: Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text('Размер шрифтов'),
-                        )),
-                        AspectRatio(
-                          aspectRatio: 1,
-                          child: Center(
-                            child: Text(
-                              '${(current.fontSizeFactor * 10).round()}',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .copyWith(fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+              SettingTile<Color>(
+                showDialogCallback: () {
+                  showDialog<Color>(
+                    context: context,
+                    builder: (context) {
+                      return ColorPickerDialog(
+                          intialColor: current.modifiedPackageColor);
+                    },
+                  ).then((newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        current.modifiedPackageColor = newValue;
+                      });
+                    }
+                  });
+                },
+                settingName: 'Измененный пакет',
+                currentConfig: current,
+                value: current.modifiedPackageColor,
+                valueIcon: Icon(
+                  Icons.abc,
+                  color: current.modifiedPackageColor,
                 ),
               ),
-              Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text('Измененный пакет'),
-                      )),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
-                        onPressed: current.isImmutable
-                            ? null
-                            : _showBeingModifiedPackageColorPickerDialog,
-                        icon: Icon(
-                          Icons.abc,
-                          color: current.modifiedPackageColor,
-                        ),
-                      ),
-                    ],
-                  ),
+              SettingTile<Color>(
+                showDialogCallback: () {
+                  showDialog<Color>(
+                    context: context,
+                    builder: (context) {
+                      return ColorPickerDialog(
+                          intialColor: current.modifiedElementColor);
+                    },
+                  ).then((newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        current.modifiedElementColor = newValue;
+                      });
+                    }
+                  });
+                },
+                settingName: 'Измененный элемент',
+                currentConfig: current,
+                value: current.modifiedPackageColor,
+                valueIcon: Icon(
+                  Icons.abc,
+                  color: current.modifiedElementColor,
                 ),
               ),
-              Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text('Измененный элемент'),
-                      )),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
-                        onPressed: current.isImmutable
-                            ? null
-                            : _showBeingModifiedElementColorSnippet,
-                        icon: Icon(
-                          Icons.abc,
-                          color: current.modifiedElementColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text('Цвет критической ошибки'),
-                      )),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        iconSize: Theme.of(context).iconTheme.size ?? 24 * 0.8,
-                        onPressed: current.isImmutable
-                            ? null
-                            : _showBeingModifiedCriticalColorSnippet,
-                        icon: Icon(
-                          Icons.abc,
-                          color: current.crititcalColor,
-                        ),
-                      ),
-                    ],
-                  ),
+              SettingTile<Color>(
+                showDialogCallback: () {
+                  showDialog<Color>(
+                    context: context,
+                    builder: (context) {
+                      return ColorPickerDialog(
+                          intialColor: current.crititcalColor);
+                    },
+                  ).then((newValue) {
+                    if (newValue != null) {
+                      setState(() {
+                        current.crititcalColor = newValue;
+                      });
+                    }
+                  });
+                },
+                settingName: 'Цвет критической ошибки',
+                currentConfig: current,
+                value: current.crititcalColor,
+                valueIcon: Icon(
+                  Icons.abc,
+                  color: current.crititcalColor,
                 ),
               ),
             ],
@@ -420,93 +388,10 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         )
       ];
 
-  void _showFontSizePickerDialog() async {
-    final selectedFontSize = await showDialog<double>(
-      context: context,
-      builder: (context) => FontSizePickerDialog(
-          initialFontSizeFactor: fontSizeFactor.toDouble()),
-    );
-    if (selectedFontSize != null) {
-      assert(selectedFontSize >= 0.5 && selectedFontSize <= 2);
-      setState(() {
-        fontSizeFactor = selectedFontSize;
-        themesList[_beingChangedThemeIndex].fontSizeFactor = fontSizeFactor;
-      });
-    }
-  }
 
-  void _showPrimaryColorPickerDialog() async {
-    final selectedColor = await showDialog<Color>(
-      context: context,
-      builder: (context) => ColorPickerDialog(
-        intialColor: themesList[_beingChangedThemeIndex].primaryColor,
-      ),
-    );
-    if (selectedColor != null) {
-      setState(() {
-        currentColor = selectedColor;
-        themesList[_beingChangedThemeIndex].primaryColor = selectedColor;
-      });
-    }
-  }
 
-  void _showBrightnessSetterDialog() async {
-    final selectedBrightness = await showDialog<Brightness>(
-      context: context,
-      builder: (context) => BrightnessPickerDialog(
-          initialBrightness: themesList[_beingChangedThemeIndex].brightness),
-    );
-    if (selectedBrightness != null) {
-      setState(() {
-        currentBrightness = selectedBrightness;
-        themesList[_beingChangedThemeIndex].brightness = currentBrightness;
-      });
-    }
-  }
 
-  void _showBeingModifiedPackageColorPickerDialog() async {
-    final selectedColor = await showDialog<Color>(
-      context: context,
-      builder: (context) => ColorPickerDialog(
-        intialColor: themesList[_beingChangedThemeIndex].modifiedPackageColor,
-      ),
-    );
-    if (selectedColor != null) {
-      setState(() {
-        themesList[_beingChangedThemeIndex].modifiedPackageColor =
-            selectedColor;
-      });
-    }
-  }
 
-  void _showBeingModifiedCriticalColorSnippet() async {
-    final selectedColor = await showDialog<Color>(
-      context: context,
-      builder: (context) => ColorPickerDialog(
-        intialColor: themesList[_beingChangedThemeIndex].crititcalColor,
-      ),
-    );
-    if (selectedColor != null) {
-      setState(() {
-        themesList[_beingChangedThemeIndex].crititcalColor = selectedColor;
-      });
-    }
-  }
-
-  void _showBeingModifiedElementColorSnippet() async {
-    final selectedColor = await showDialog<Color>(
-      context: context,
-      builder: (context) => ColorPickerDialog(
-        intialColor: themesList[_beingChangedThemeIndex].modifiedElementColor,
-      ),
-    );
-    if (selectedColor != null) {
-      setState(() {
-        themesList[_beingChangedThemeIndex].modifiedElementColor =
-            selectedColor;
-      });
-    }
-  }
 
   void addNewConfig(int index) {
     var currentTheme = themesList[_beingChangedThemeIndex];
@@ -527,3 +412,4 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
     });
   }
 }
+
