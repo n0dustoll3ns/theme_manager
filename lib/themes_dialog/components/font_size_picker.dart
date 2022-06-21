@@ -31,7 +31,7 @@ class FontSizePickerDialogState extends State<FontSizePickerDialog> {
             divisions: 15,
             min: 0.5,
             max: 2,
-            label: '${(_fontSize * 100).round()} %',
+            label: '${(_fontSize * 10).round()}',
             onChanged: (double value) {
               setState(() {
                 _fontSize = value;

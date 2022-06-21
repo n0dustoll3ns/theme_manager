@@ -25,6 +25,7 @@ class SideMenu extends StatelessWidget {
           ),
           TextButton(
             onPressed: () => showDialog<FinalChanges>(
+                barrierDismissible: false,
                 context: context,
                 builder: (BuildContext context) => Consumer<ThemeProvider>(
                         builder: (context, themeProvider, child) {

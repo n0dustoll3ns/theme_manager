@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:themes_sandbox/themes_dialog/components/additional_changes.dart';
 
 import '../UX/user_theme_config.dart';
@@ -64,8 +65,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
       if (!focusNode.hasFocus) {
         setState(() {
           _isBeingRenamed = false;
-          themesList[_beingChangedThemeIndex].name =
-              renamingTextController.text;
         });
       }
     });
@@ -169,20 +168,19 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                       isRenamingNow:
                           _isBeingRenamed && _beingChangedThemeIndex == index,
                       renamingTextController: renamingTextController,
-                      beginRenaming: () {
-                        setState(
-                          () {
-                            _beingChangedThemeIndex = index;
-                            currentColor = themesList[index].primaryColor;
-                            currentBrightness = themesList[index].brightness;
-                            fontSizeFactor = themesList[index].fontSizeFactor;
-                            renamingTextController.text =
-                                themesList[index].name;
+                      beginRenaming:
+                          !themesList[_beingChangedThemeIndex].isImmutable
+                              ? () {
+                                  setState(
+                                    () {
+                                      renamingTextController.text =
+                                          themesList[index].name;
 
-                            _isBeingRenamed = true;
-                          },
-                        );
-                      },
+                                      _isBeingRenamed = true;
+                                    },
+                                  );
+                                }
+                              : null,
                     );
             },
           ),
@@ -259,32 +257,35 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                   ),
                 ),
               ),
-              Card(
-                margin: EdgeInsets.zero,
-                elevation: 0,
-                child: SizedBox(
-                  height: 34,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Expanded(
-                          child: Padding(
-                        padding: EdgeInsets.only(left: 8.0),
-                        child: Text('Размер шрифтов'),
-                      )),
-                      TextButton(
-                        onPressed: current.isImmutable
-                            ? null
-                            : _showFontSizePickerDialog,
-                        child: Text(
-                          '${(current.fontSizeFactor * 100).round()} %',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .copyWith(fontWeight: FontWeight.bold),
+              GestureDetector(
+                onTap: current.isImmutable ? null : _showFontSizePickerDialog,
+                child: Card(
+                  margin: EdgeInsets.zero,
+                  elevation: 0,
+                  child: SizedBox(
+                    height: 34,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(
+                            child: Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text('Размер шрифтов'),
+                        )),
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: Center(
+                            child: Text(
+                              '${(current.fontSizeFactor * 10).round()}',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .copyWith(fontWeight: FontWeight.bold),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),

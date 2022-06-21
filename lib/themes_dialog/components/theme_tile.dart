@@ -18,7 +18,7 @@ class ThemeTile extends StatelessWidget {
   final bool isBeingChanged;
   final UserThemeConfig themeConfig;
   final VoidCallback configureThis;
-  final VoidCallback beginRenaming;
+  final VoidCallback? beginRenaming;
   final Function(String) rename;
   final VoidCallback delete;
   final FocusNode focusNode;
@@ -31,8 +31,7 @@ class ThemeTile extends StatelessWidget {
         ? Theme.of(context).iconTheme.color
         : const Color(0x809E9E9E);
     return GestureDetector(
-      onDoubleTap: beginRenaming,
-      onTap: configureThis,
+      onTap: isBeingChanged ? beginRenaming : configureThis,
       child: Card(
         margin: EdgeInsets.zero,
         elevation: 0,
@@ -52,8 +51,8 @@ class ThemeTile extends StatelessWidget {
                             suffixIcon: IconButton(
                               color: Theme.of(context).iconTheme.color,
                               padding: EdgeInsets.zero,
-                              iconSize: Theme.of(context).iconTheme.size ??
-                                  24 * 0.8,
+                              iconSize:
+                                  Theme.of(context).iconTheme.size ?? 24 * 0.8,
                               onPressed: () {
                                 rename(renamingTextController.text);
                               },
