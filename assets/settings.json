@@ -3,11 +3,11 @@
     [
       "isImmutable",
       "Неизменяемый",
-      "boolean"
+      "bool"
     ],
     [
       "primaryColor",
-      "Главный цвет темы",
+      "Главный 1111вет темы",
       "Color"
     ],
     [
@@ -38,6 +38,11 @@
     [
       "crititcalColor",
       "Цвет критической ошибки",
+      "Color"
+    ],
+    [
+      "uncrititcalColor",
+      "Цвет критичесaaaaaaaaaaaaкой ошибки",
       "Color"
     ]
   ]

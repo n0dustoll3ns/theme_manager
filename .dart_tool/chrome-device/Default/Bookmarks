@@ -1,0 +1,40 @@
+{
+   "checksum": "379a35d45e12fec5b02c9a7d1cc552ce",
+   "roots": {
+      "bookmark_bar": {
+         "children": [ {
+            "date_added": "13299252246993321",
+            "guid": "c3ac0b4d-e9ab-40bc-90e0-fd5e41169daf",
+            "id": "5",
+            "name": "theme editor",
+            "type": "url",
+            "url": "https://rxlabz.github.io/panache/#/editor"
+         } ],
+         "date_added": "13299246135907934",
+         "date_modified": "13299252246993321",
+         "guid": "0bc5d13f-2cba-5d74-951f-3f233fe6c908",
+         "id": "1",
+         "name": "Bookmarks bar",
+         "type": "folder"
+      },
+      "other": {
+         "children": [  ],
+         "date_added": "13299246135907937",
+         "date_modified": "0",
+         "guid": "82b081ec-3dd3-529c-8475-ab6c344590dd",
+         "id": "2",
+         "name": "Other bookmarks",
+         "type": "folder"
+      },
+      "synced": {
+         "children": [  ],
+         "date_added": "13299246135907938",
+         "date_modified": "0",
+         "guid": "4cf2e351-0e85-532b-bb37-df045d8f8d0f",
+         "id": "3",
+         "name": "Mobile bookmarks",
+         "type": "folder"
+      }
+   },
+   "version": 1
+}

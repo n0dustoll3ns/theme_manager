@@ -1,0 +1,26 @@
+{
+  "themes": [
+    {
+      "isImmutable": true,
+      "primaryColor": "#2196f3",
+      "backgroundColor": "#FAFAFA",
+      "fontSizeFactor": 1,
+      "iconColor": "#2196f3",
+      "name": "Cветлая тема",
+      "modifiedPackageColor": "#4caf50",
+      "modifiedElementColor": "#ffeb3b",
+      "crititcalColor": "#f44336"
+    },
+    {
+      "isImmutable": true,
+      "primaryColor": "#f44336",
+      "backgroundColor": "#303030",
+      "fontSizeFactor": 1,
+      "iconColor": "#f44336",
+      "name": "Темная тема",
+      "modifiedPackageColor": "#4caf50",
+      "modifiedElementColor": "#ffeb3b",
+      "crititcalColor": "#f44336"
+    }
+  ]
+}

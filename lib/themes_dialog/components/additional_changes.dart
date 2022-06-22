@@ -1,4 +1,5 @@
-import 'package:themes_sandbox/UX/user_theme_config.dart';
+
+import '../../staff_data/user_theme_config.dart';
 
 class FinalChanges {
   final List<UserThemeConfig> newConfigList;

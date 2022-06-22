@@ -5,9 +5,12 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:themes_sandbox/UX/user_theme_config.dart';
+import 'package:themes_sandbox/staff_data/user_theme_config.dart';
 
 void main() {
   // testWidgets('Counter increments smoke test', (WidgetTester tester) async {
@@ -27,7 +30,7 @@ void main() {
   //   expect(find.text('1'), findsOneWidget);
   // });
 
-  test('(de)serialazation', () {
+  test('(de)serialazation themes', () {
     expect(defaultThemeConfigurations[0].toJson(), {
       'isImmutable': true,
       'primaryColor': "#ff2196f3",
@@ -54,5 +57,18 @@ void main() {
     expect(darkConfig.modifiedPackageColor.value, Colors.green.value);
     expect(darkConfig.modifiedElementColor.value, Colors.yellow.value);
     expect(darkConfig.crititcalColor.value, Colors.red.value);
+  });
+  test('(de)serialazation setting names', () async {
+    final String settingNamesEncoded =
+        await rootBundle.loadString('settings.json');
+    List<String> _setteingNames = [];
+
+    try {
+      List<List<String>> settingNamesUnpacked =
+          jsonDecode(settingNamesEncoded)["settings"];
+      _setteingNames.addAll(settingNamesUnpacked.map((e) => e[1]));
+    } finally {}
+
+    expect(_setteingNames[0], "Неизменяемый");
   });
 }

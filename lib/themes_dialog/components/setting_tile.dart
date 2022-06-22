@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:themes_sandbox/UX/user_theme_config.dart';
+
+import '../../staff_data/user_theme_config.dart';
 
 class SettingTile<T> extends StatelessWidget {
   final String settingName;

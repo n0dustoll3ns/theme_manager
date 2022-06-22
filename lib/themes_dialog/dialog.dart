@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:themes_sandbox/themes_dialog/components/additional_changes.dart';
 
-import '../UX/user_theme_config.dart';
+import '../staff_data/user_theme_config.dart';
 import '../styles.dart';
-import 'components/brightness_picker.dart';
 import 'components/color_picker_dialog.dart';
 import 'components/font_size_picker.dart';
 import 'components/setting_tile.dart';
@@ -13,11 +12,12 @@ import 'components/viewport_size_alert.dart';
 class ThemeSettingsDialogWindow extends StatefulWidget {
   ThemeSettingsDialogWindow(
       {required this.beingChangedThemeIndex,
-      required this.availableConfigurations})
+      required this.availableConfigurations,
+      required this.settingNames})
       : super(key: UniqueKey());
   final int beingChangedThemeIndex;
   final List<UserThemeConfig> availableConfigurations;
-
+  final Map<String, String> settingNames;
   @override
   State<ThemeSettingsDialogWindow> createState() =>
       _ThemeSettingsDialogWindowState();
@@ -68,13 +68,11 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         });
       }
     });
-    
   }
 
   @override
   Widget build(BuildContext context) {
     var current = themesList[_beingChangedThemeIndex];
-    String asldkfj = (BuildContext).toString();
     return (MediaQuery.of(context).size.width < 660 ||
             MediaQuery.of(context).size.height < 660)
         ? const ViewportSizeAlertDialog()
@@ -192,6 +190,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
 
   Column rightColumn(UserThemeConfig current, BuildContext context) {
     var current = themesList[_beingChangedThemeIndex];
+    var settingNames = widget.settingNames.values.toList();
     return Column(
       children: [
         const Padding(
@@ -217,7 +216,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Главный цвет темы',
+                settingName: settingNames[0],
                 currentConfig: current,
                 value: current.primaryColor,
                 valueIcon: Icon(Icons.circle, color: current.primaryColor),
@@ -236,7 +235,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Цвет фона',
+                settingName: settingNames[1],
                 currentConfig: current,
                 value: current.backgroundColor,
                 valueIcon: Icon(
@@ -260,7 +259,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Размер шрифтов',
+                settingName: settingNames[2],
                 currentConfig: current,
                 value: current.fontSizeFactor,
                 valueIcon: Text(
@@ -287,7 +286,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Измененный пакет',
+                settingName: settingNames[3],
                 currentConfig: current,
                 value: current.modifiedPackageColor,
                 valueIcon: Icon(
@@ -311,7 +310,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Измененный элемент',
+                settingName: settingNames[4],
                 currentConfig: current,
                 value: current.modifiedPackageColor,
                 valueIcon: Icon(
@@ -335,7 +334,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Цвет критической ошибки',
+                settingName: settingNames[5],
                 currentConfig: current,
                 value: current.crititcalColor,
                 valueIcon: Icon(

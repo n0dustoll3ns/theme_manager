@@ -1,0 +1,12 @@
+2022/06/08-18:42:16.940 1274 Reusing MANIFEST C:\Users\FOMINY~1\AppData\Local\Temp\flutter_tools.a780e21c\flutter_tools_chrome_device.5add449f\Default\IndexedDB\https_www.youtube.com_0.indexeddb.leveldb/MANIFEST-000001
+2022/06/08-18:42:16.941 1274 Recovering log #3
+2022/06/08-18:42:16.941 1274 Reusing old log C:\Users\FOMINY~1\AppData\Local\Temp\flutter_tools.a780e21c\flutter_tools_chrome_device.5add449f\Default\IndexedDB\https_www.youtube.com_0.indexeddb.leveldb/000003.log 
+2022/06/08-18:42:17.588 1274 Level-0 table #5: started
+2022/06/08-18:42:17.598 1274 Level-0 table #5: 34645 bytes OK
+2022/06/08-18:42:17.601 1274 Delete type=0 #3
+2022/06/08-18:42:17.601 1274 Manual compaction at level-0 from '\x00\x03\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x04\x00\x00\x00' @ 0 : 0; will stop at (end)
+2022/06/08-18:42:17.642 253c Manual compaction at level-0 from '\x00\x04\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x05\x00\x00\x00' @ 0 : 0; will stop at (end)
+2022/06/08-18:42:17.644 4dc Level-0 table #7: started
+2022/06/08-18:42:17.648 4dc Level-0 table #7: 2857 bytes OK
+2022/06/08-18:42:17.651 4dc Delete type=0 #4
+2022/06/08-18:42:17.652 4dc Manual compaction at level-0 from '\x00\x05\x00\x00\x00' @ 72057594037927935 : 1 .. '\x00\x06\x00\x00\x00' @ 0 : 0; will stop at (end)

@@ -3,14 +3,43 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../UX/user_theme_config.dart';
 import '../keys.dart';
+import '../staff_data/user_theme_config.dart';
 
 class ThemeProvider with ChangeNotifier {
   int _selectedTheme = 0;
+  // ignore: prefer_final_fields
+  Map<String, String> _settingNames = {
+    settingKeys[0]:
+        "Главный цвет темы",
+    settingKeys[1]: "Цвет фона",
+    settingKeys[2]: "Размер шрифтов",
+    settingKeys[3]: "Измененный пакет",
+    settingKeys[4]:
+        "Измененный элемент",
+    settingKeys[5]:
+        "Цвет критической ошибки"
+  };
   List<UserThemeConfig> _availableConfigurations = defaultThemeConfigurations;
+  Map<String, String> get settingNames => _settingNames;
   ThemeProvider.fromStorage() {
     loadState();
+  }
+
+  loadSettingNamesFromJson() async {
+    final String settingNamesEncoded =
+        await rootBundle.loadString('settings.json');
+    List<dynamic> settingNamesUnpackedList =
+        jsonDecode(settingNamesEncoded)["settings"];
+    Map<String, String> settingNamesUnpackedMap = {};
+    for (var element in settingNamesUnpackedList) {
+      settingNamesUnpackedMap.addAll({element[0]: element[1]});
+    }
+    _settingNames.forEach((key, value) {
+      if (settingNamesUnpackedMap.containsKey(key)) {
+        _settingNames[key] = settingNamesUnpackedMap[key]!;
+      }
+    });
   }
 
   loadState() async {
@@ -34,6 +63,7 @@ class ThemeProvider with ChangeNotifier {
     if (prefs.getStringList(keyOfOptionsList) != null) {
       _availableConfigurations.addAll(decodeThemes(themesInStrorage));
     }
+    loadSettingNamesFromJson();
     notifyListeners();
   }
 
@@ -55,7 +85,4 @@ class ThemeProvider with ChangeNotifier {
         .then((value) => value.setInt(keyOfSelectedOption, _selectedTheme));
     notifyListeners();
   }
-
-  
-
 }
