@@ -19,7 +19,9 @@ BoxDecoration kDefaultWindowTitleDecorationOf(BuildContext context) =>
     );
 
 Color computedFontLuminanceFrom(BuildContext context) =>
-    Theme.of(context).primaryColor.computeLuminance() > 0.5
+    Theme.of(context).primaryColor.computeLuminance() > 0.38
         ? Colors.black
         : Colors.white;
 
+Brightness computeBrightnessFromBackgroundColor(Color color) =>
+    color.computeLuminance() > 0.5 ? Brightness.light:Brightness.dark;

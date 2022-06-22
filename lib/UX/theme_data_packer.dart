@@ -10,8 +10,13 @@ ThemeData buildThemeData(
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(elevation: 5),
     ),
+    scaffoldBackgroundColor: selectedConfig.backgroundColor,
+    drawerTheme:
+        DrawerThemeData(backgroundColor: selectedConfig.backgroundColor),
+    dialogBackgroundColor: selectedConfig.backgroundColor,
     brightness: selectedConfig.brightness,
     primaryColor: selectedConfig.primaryColor,
+    cardColor: selectedConfig.backgroundColor,
     primarySwatch:
         AppColors.getMaterialColorFromColor(selectedConfig.primaryColor),
     buttonTheme: ButtonThemeData(buttonColor: selectedConfig.primaryColor),

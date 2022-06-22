@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import '../styles.dart';
 import 'hex_to_string_converter.dart';
 
 const List<Color> presetColors = [
@@ -14,32 +15,32 @@ const List<Color> presetColors = [
 
 class UserThemeConfig {
   final bool isImmutable;
-  Brightness brightness;
+  Brightness get brightness =>
+      computeBrightnessFromBackgroundColor(backgroundColor);
   Color primaryColor;
+  Color backgroundColor;
   double fontSizeFactor;
-  Color iconColor;
   String name;
   Color modifiedPackageColor;
   Color modifiedElementColor;
   Color crititcalColor;
 
   UserThemeConfig({
-    required this.brightness,
     required this.primaryColor,
+    required this.backgroundColor,
     required this.isImmutable,
     required this.fontSizeFactor,
     required this.name,
     required this.modifiedPackageColor,
     required this.modifiedElementColor,
     required this.crititcalColor,
-  }) : iconColor = primaryColor;
+  });
 
   Map<String, dynamic> toJson() => {
         'isImmutable': isImmutable,
-        'brightness': brightness.name.toString(),
+        'backgroundColor': backgroundColor.toHex(),
         'primaryColor': primaryColor.toHex(),
         'fontSizeFactor': fontSizeFactor,
-        'iconColor': iconColor.toHex(),
         'name': name,
         'modifiedPackageColor': modifiedPackageColor.toHex(),
         'modifiedElementColor': modifiedElementColor.toHex(),
@@ -48,11 +49,9 @@ class UserThemeConfig {
 
   UserThemeConfig.fromJson(Map<String, dynamic> json)
       : isImmutable = json['isImmutable'],
-        brightness =
-            json['brightness'] == 'light' ? Brightness.light : Brightness.dark,
         primaryColor = HexColor.fromHex(json['primaryColor']),
+        backgroundColor = HexColor.fromHex(json['backgroundColor']),
         fontSizeFactor = json['fontSizeFactor'],
-        iconColor = HexColor.fromHex(json['iconColor']),
         name = json['name'],
         modifiedPackageColor = HexColor.fromHex(json['modifiedPackageColor']),
         modifiedElementColor = HexColor.fromHex(json['modifiedElementColor']),
@@ -62,9 +61,9 @@ class UserThemeConfig {
 List<UserThemeConfig> defaultThemeConfigurations = [
   UserThemeConfig(
     isImmutable: true,
-    brightness: Brightness.light,
-    name: 'Светлая тема',
     primaryColor: Colors.blue,
+    backgroundColor: const Color(0xFFFAFAFA),
+    name: 'Светлая тема',
     fontSizeFactor: 1,
     modifiedPackageColor: Colors.green,
     modifiedElementColor: Colors.yellow,
@@ -72,9 +71,9 @@ List<UserThemeConfig> defaultThemeConfigurations = [
   ),
   UserThemeConfig(
     isImmutable: true,
-    brightness: Brightness.dark,
-    name: 'Темная тема',
     primaryColor: Colors.red,
+    backgroundColor: const Color(0xFF303030),
+    name: 'Темная тема',
     fontSizeFactor: 1,
     modifiedPackageColor: Colors.green,
     modifiedElementColor: Colors.yellow,

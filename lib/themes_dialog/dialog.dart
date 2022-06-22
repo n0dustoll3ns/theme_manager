@@ -216,28 +216,28 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                     }
                   });
                 },
-                settingName: 'Цвет фона',
+                settingName: 'Главный цвет темы',
                 currentConfig: current,
                 value: current.primaryColor,
                 valueIcon: Icon(Icons.circle, color: current.primaryColor),
               ),
-              SettingTile<Brightness>(
+              SettingTile<Color>(
                 showDialogCallback: () {
-                  showDialog<Brightness>(
+                  showDialog<Color>(
                     context: context,
-                    builder: (context) => BrightnessPickerDialog(
-                        initialBrightness: current.brightness),
+                    builder: (context) =>
+                        ColorPickerDialog(intialColor: current.backgroundColor),
                   ).then((newValue) {
                     if (newValue != null) {
                       setState(() {
-                        current.brightness = newValue;
+                        current.backgroundColor = newValue;
                       });
                     }
                   });
                 },
                 settingName: 'Цвет фона',
                 currentConfig: current,
-                value: current.brightness,
+                value: current.backgroundColor,
                 valueIcon: Icon(
                   current.brightness == Brightness.light
                       ? Icons.brightness_5_rounded
@@ -395,7 +395,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
       renamingTextController.text = 'Настраиваемая тема $index';
       _beingChangedThemeIndex = index;
       UserThemeConfig newConfig = UserThemeConfig(
-        brightness: currentTheme.brightness,
+        backgroundColor: currentTheme.backgroundColor,
         isImmutable: false,
         name: 'Настраиваемая тема $index',
         primaryColor: currentColor,
