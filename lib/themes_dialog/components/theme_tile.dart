@@ -48,7 +48,11 @@ class ThemeTile extends StatelessWidget {
                   child: isRenamingNow
                       ? RawKeyboardListener(
                           onKey: (value) {
-                            if (value.logicalKey == LogicalKeyboardKey.escape) {
+                            if (value.logicalKey == LogicalKeyboardKey.escape ||
+                                value.logicalKey ==
+                                    LogicalKeyboardKey.arrowDown ||
+                                value.logicalKey ==
+                                    LogicalKeyboardKey.arrowUp) {
                               focusNode.unfocus();
                             }
                           },
