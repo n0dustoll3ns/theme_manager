@@ -23,7 +23,8 @@ class SideMenu extends StatelessWidget {
               "Какое-нибудь меню",
             ),
           ),
-          TextButton(
+          Spacer(),
+          ElevatedButton(
             onPressed: () => showDialog<FinalChanges>(
                 barrierDismissible: false,
                 context: context,
@@ -41,8 +42,9 @@ class SideMenu extends StatelessWidget {
                         userChanges.newConfigList, userChanges.selectedOption);
               }
             }),
-            child: const Text('конфигуратор тем'),
-          )
+            child: const Text('Конфигуратор тем'),
+          ),
+          Spacer()
         ],
       ),
     );

@@ -68,12 +68,13 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         });
       }
     });
+    
   }
 
   @override
   Widget build(BuildContext context) {
     var current = themesList[_beingChangedThemeIndex];
-
+    String asldkfj = (BuildContext).toString();
     return (MediaQuery.of(context).size.width < 660 ||
             MediaQuery.of(context).size.height < 660)
         ? const ViewportSizeAlertDialog()

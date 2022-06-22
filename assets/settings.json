@@ -1,0 +1,44 @@
+{
+  "settings": [
+    [
+      "isImmutable",
+      "Неизменяемый",
+      "boolean"
+    ],
+    [
+      "primaryColor",
+      "Главный цвет темы",
+      "Color"
+    ],
+    [
+      "backgroundColor",
+      "Цвет фона",
+      "Color"
+    ],
+    [
+      "fontSizeFactor",
+      "Размер шрифтов",
+      "double"
+    ],
+    [
+      "name",
+      "Название",
+      "String"
+    ],
+    [
+      "modifiedPackageColor",
+      "Измененный пакет",
+      "Color"
+    ],
+    [
+      "modifiedElementColor",
+      "Измененный элемент",
+      "Color"
+    ],
+    [
+      "crititcalColor",
+      "Цвет критической ошибки",
+      "Color"
+    ]
+  ]
+}
