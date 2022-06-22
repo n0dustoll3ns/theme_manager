@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../UX/default_config.dart';
 import '../UX/user_theme_config.dart';
 import '../keys.dart';
 
@@ -26,9 +25,8 @@ class ThemeProvider with ChangeNotifier {
           .toList();
       _availableConfigurations.addAll(defaultThemes);
     } finally {
-      defaultThemesUnpacked = defaultThemesWithinBuild;
+      _availableConfigurations = defaultThemeConfigurations;
     }
-    //ДОБАВИЛ ТЕМЫ В КОД НА СЛУЧАЙ УТРАТЫ ИЛИ ПОРЧИ ФАЙЛА JSON
 
     var prefs = await SharedPreferences.getInstance();
     var themesInStrorage = prefs.getStringList(keyOfOptionsList) ?? [];
@@ -49,8 +47,6 @@ class ThemeProvider with ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList(keyOfOptionsList, encodeThemes(configurations));
     switchThemeTo(selectedOption);
-    // var defaultThemes =
-    //     (await rootBundle.loadString('assets/customthemes.json'));
   }
 
   void switchThemeTo(int selectedOption) async {
@@ -59,4 +55,7 @@ class ThemeProvider with ChangeNotifier {
         .then((value) => value.setInt(keyOfSelectedOption, _selectedTheme));
     notifyListeners();
   }
+
+  
+
 }
