@@ -190,6 +190,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
   }
 
   Column rightColumn(UserThemeConfig current, BuildContext context) {
+    var current = themesList[_beingChangedThemeIndex];
     return Column(
       children: [
         const Padding(
@@ -241,7 +242,7 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
                   current.brightness == Brightness.light
                       ? Icons.brightness_5_rounded
                       : Icons.brightness_2_rounded,
-                  color: currentColor,
+                  color: current.primaryColor,
                 ),
               ),
               SettingTile<double>(
@@ -388,11 +389,6 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
         )
       ];
 
-
-
-
-
-
   void addNewConfig(int index) {
     var currentTheme = themesList[_beingChangedThemeIndex];
     setState(() {
@@ -412,4 +408,3 @@ class _ThemeSettingsDialogWindowState extends State<ThemeSettingsDialogWindow> {
     });
   }
 }
-

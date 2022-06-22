@@ -6,7 +6,7 @@ import 'UX/theme_data_packer.dart';
 import 'sidemenu/sidemenu.dart';
 import 'provider/theme_provider.dart';
 
-void main() {
+void main() async {
   runApp(const MyApp());
 }
 

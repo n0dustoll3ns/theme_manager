@@ -3,24 +3,24 @@
     {
       "isImmutable": true,
       "brightness": "light",
-      "primaryColor": "#ff2196f3",
+      "primaryColor": "#2196f3",
       "fontSizeFactor": 1,
-      "iconColor": "#ff2196f3",
+      "iconColor": "#2196f3",
       "name": "Cветлая тема",
-      "modifiedPackageColor": "#ff4caf50",
-      "modifiedElementColor": "#ffffeb3b",
-      "crititcalColor": "#fff44336"
+      "modifiedPackageColor": "#4caf50",
+      "modifiedElementColor": "#ffeb3b",
+      "crititcalColor": "#f44336"
     },
     {
       "isImmutable": true,
       "brightness": "dark",
-      "primaryColor": "#fff44336",
+      "primaryColor": "#f44336",
       "fontSizeFactor": 1,
-      "iconColor": "#fff44336",
+      "iconColor": "#f44336",
       "name": "Темная тема",
-      "modifiedPackageColor": "#ff4caf50",
-      "modifiedElementColor": "#ffffeb3b",
-      "crititcalColor": "#fff44336"
+      "modifiedPackageColor": "#4caf50",
+      "modifiedElementColor": "#ffeb3b",
+      "crititcalColor": "#f44336"
     }
   ]
 }

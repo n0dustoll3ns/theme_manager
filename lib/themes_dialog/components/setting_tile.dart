@@ -20,6 +20,7 @@ class SettingTile<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: currentConfig.isImmutable ? null : showDialogCallback,
       child: Card(
         margin: EdgeInsets.zero,
